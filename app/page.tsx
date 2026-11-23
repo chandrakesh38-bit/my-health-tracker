@@ -26,7 +26,7 @@ async function decryptBackup(payload:any,password:string){if(payload?.format!==1
 
 export default function Home(){
  const [tab,setTab]=useState('Today'),[meals]=useState(initial),[active,setActive]=useState<Meal|null>(null),[logs,setLogs]=useState<Record<string,Log>>({}),[weight,setWeight]=useState('72'),[waist,setWaist]=useState(''),[history,setHistory]=useState<HistoryEntry[]>([]),[toast,setToast]=useState('');
- const [clientId,setClientId]=useState(''),[password,setPassword]=useState(''),[accessToken,setAccessToken]=useState(''),[driveStatus,setDriveStatus]=useState('Not connected'),[lastBackup,setLastBackup]=useState(''),[busy,setBusy]=useState(false),[pending,setPending]=useState(false);
+ const [clientId,setClientId]=useState(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID||''),[password,setPassword]=useState(''),[accessToken,setAccessToken]=useState(''),[driveStatus,setDriveStatus]=useState('Not connected'),[lastBackup,setLastBackup]=useState(''),[busy,setBusy]=useState(false),[pending,setPending]=useState(false);
  const tokenClient=useRef<{requestAccessToken:(options?:{prompt?:string})=>void}|null>(null);const fileId=useRef('');const backupTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
  useEffect(()=>{try{setLogs(JSON.parse(localStorage.getItem('mht-logs')||'{}'));setHistory(JSON.parse(localStorage.getItem('mht-history')||'[]'));setClientId(localStorage.getItem('mht-google-client-id')||'');setLastBackup(localStorage.getItem('mht-drive-last-backup')||'');}catch{}},[]);
  const totals=useMemo(()=>Object.values(logs).filter(x=>x.status!=='skipped').flatMap(x=>x.foods).reduce((a,x)=>({kcal:a.kcal+x.kcal,p:a.p+x.p,c:a.c+x.c,f:a.f+x.f,fibre:a.fibre+x.fibre}),{kcal:0,p:0,c:0,f:0,fibre:0}),[logs]);
