@@ -1,0 +1,1 @@
+{"name":"My Health Tracker","short_name":"Health Tracker","description":"Personal diet and health tracker","start_url":"/","display":"standalone","background_color":"#f3f6f8","theme_color":"#142b43","icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
